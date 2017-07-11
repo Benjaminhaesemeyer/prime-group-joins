@@ -25,3 +25,8 @@ SELECT count(*) FROM "customers";
 --7. How many products do we carry?
 SELECT count(*) FROM "products";
 --8. What is the total available on-hand quantity of diet pepsi?
+SELECT SUM("warehouse_product"."on_hand")
+FROM "warehouse_product"
+JOIN "products" ON "products"."id" = "warehouse_product"."product_id"
+WHERE "products"."description" ILIKE 'diet pepsi%'
+GROUP BY "products"."id";
